@@ -72,10 +72,14 @@ jobs:
           path: ${{ env.images_dir }}/*.7z
       - name: Upload images to Releases
         if: ${{ github.event_name == 'release' && success() }}
-        uses: svenstaro/upload-release-action@2.2.0
+        uses: svenstaro/upload-release-action@main
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          repo_token: ${{ secrets.GH_TOKEN }}
           file: ${{ env.images_dir }}/*.trx
           tag: ${{ github.ref }}
           overwrite: true
           file_glob: true
+          body: |
+            默认ip：192.168.2.1
+            默认用户名/密码：admin/admin
+            默认WiFi密码：1234567890
